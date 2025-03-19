@@ -1,0 +1,16 @@
+##Exercise 10
+
+MariaDB [paintings]> SELECT work.name AS Portraits, artist.full_name AS artist_name, museum.name AS museum_name, artist.nationality, artist.birth, museum.country FROM artist JOIN work ON artist.artist_id=work.artist_id JOIN museum ON
+work.museum_id=museum.museum_id WHERE artist.nationality='Italian' AND (artist.birth BETWEEN 1450 AND 1459) AND museum.country='France' ORDER BY Portraits LIMIT 1 OFFSET 7;
++----------------------------------------+-------------------+------------------+-------------+-------+---------+
+| Portraits                              | artist_name       | museum_name      | nationality | birth | country |
++----------------------------------------+-------------------+------------------+-------------+-------+---------+
+| The Virgin and the Child with St. Anne | Leonardo Da Vinci | Musée du Louvre  | Italian     |  1452 | France  |
++----------------------------------------+-------------------+------------------+-------------+-------+---------+
+1 row in set (0.002 sec)
+
+MariaDB [paintings]> SELECT COUNT(DISTINCT artist.nationality) AS artist_nationalities, museum.country AS host_countr
+y FROM work JOIN artist ON work.artist_id=artist.artist_id JOIN museum ON artist WHERE artist_nationalities >= 3 LIMI
+T 5;
+ERROR 1054 (42S22): Unknown column 'artist_nationalities' in 'WHERE'
+MariaDB [paintings]> 
